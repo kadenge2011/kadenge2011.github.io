@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
+    <link rel="stylesheet" href="../../../css/styles.css">
+</head>
+<body class="payment-page success-page">
+
+    <header class="site-header">
+        <h1>Payment Successful</h1>
+    </header>
+
+    <main class="container payment-layout">
+        <section class="success-message">
+            <h2>Thank You</h2>
+            <p>Your transaction has been completed successfully.</p>
+        </section>
+
+        <section class="release payment-release">
+            <a href="song.mp3" download>
+                <img class="payment-art" src="Newest_Release.jpeg" alt="Download your track">
+            </a>
+            <p>Click the artwork to download your track.</p>
+        </section>
+    </main>
+
+    <footer>
+        MMK &copy; 2026
+    </footer>
+
+</body>
+</html>

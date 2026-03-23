@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMK</title>
+    <meta name="description" content="MMK community page.">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <h1>MMK</h1>
+    </header>
+
+    <main class="container">
+        <!-- Public message board where visitors can read and post updates -->
+        <section id="forum">
+            <h2>Forum</h2>
+
+    <!-- Message form: collects the visitor name and message text -->
+    <form id="message-form">
+        <input type="text" id="name" placeholder="Your name" required maxlength="50"/>
+        <textarea id="message" placeholder="Write a message..." required maxlength="300"></textarea>
+        <button type="submit">Post</button>
+    </form>
+
+  <!-- Message feed container: filled dynamically from the database -->
+  <div id="messages"></div>
+</section>
+
+
+    <footer>
+        MMK &copy; 2026
+    </footer>
+
+    <script type="module">
+      import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+      const supabaseUrl = "https://mfzvlwxcnuqvzftjlmfo.supabase.co";
+      const supabaseKey = "sb_publishable_8uvuMz-fPZ1bHJoOqbqLiA_Cm1HWmnA";
+
+      // Create database connection used for reading and posting messages
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      const form = document.getElementById("message-form");
+      const messagesDiv = document.getElementById("messages");
+
+      // Load latest messages (newest first) and render them in the feed
+      async function loadMessages() {
+        const { data, error } = await supabase
+          .from("messages")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          console.error(error);
+          return;
+        }
+
+        // Clear existing list before repainting with fresh data
+        messagesDiv.innerHTML = "";
+
+        data.forEach(msg => {
+          const div = document.createElement("div");
+          div.classList.add("message");
+
+          // Highlight admin posts with a dedicated style
+          if (msg.is_admin) {
+            div.classList.add("admin-message");
+          }
+
+          div.innerHTML = `
+            <strong>
+              ${msg.name}
+              ${msg.is_admin ? '<span class="badge">ADMIN</span>' : ''}
+            </strong>
+            <p>${msg.message}</p>
+            <small>${new Date(msg.created_at).toLocaleString()}</small>
+          `;
+
+          messagesDiv.appendChild(div);
+        });
+      }
+
+      // Save a new user message when the form is submitted
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        // Prevent empty submissions
+        if (!name || !message) return;
+
+        // Insert new message into the messages table
+        const { error } = await supabase.from("messages").insert([
+          { name, message }
+        ]);
+
+        if (error) {
+          console.error(error);
+          return;
+        }
+
+        // Reset form and refresh list so the new post appears immediately
+        form.reset();
+        loadMessages();
+      });
+
+      // Show current messages when the page first loads
+      loadMessages();
+      
+      // Refresh messages every 10 seconds to show new posts in near real-time
+      setInterval(loadMessages, 10000); 
+
+</script>
+</body>
+</html>
+</main>

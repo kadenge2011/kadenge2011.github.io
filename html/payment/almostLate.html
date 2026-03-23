@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Almost Late - Purchase</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=BAAWdIduSeTeAYRpQyxNKGMd3RmqI_iWRRfzqmgb7LMmw6vi-F6MfewqmBol7MlQirEqIpAVtgQPTWBfgE&components=hosted-buttons&disable-funding=venmo&currency=GBP">
+    </script>
+</head>
+<body class="payment-page">
+
+    <header class="site-header">
+        <h1>ALMOST LATE</h1>
+    </header>
+
+    <main class="container payment-layout">
+        <section class="release payment-release">
+            <img class="payment-art" src="../../assets/images/almostLate.jpg" alt="Almost Late artwork">
+        </section>
+
+        <p class="payment-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id vestibulum nisl. Fusce mattis quam in efficitur porttitor. Nulla rutrum, risus sed facilisis imperdiet, mi purus rhoncus ligula, ac ultrices ligula urna vitae leo. Nullam maximus orci sit amet egestas placerat. Nulla purus tellus, mattis ut erat fringilla, gravida dictum erat. Mauris porta congue mattis. Phasellus facilisis tincidunt augue et egestas. Integer ultrices eget est et cursus. In euismod vestibulum orci, nec eleifend justo rutrum id. Vivamus fermentum erat ut varius rutrum.
+        </p>
+
+        <p><strong>Format:</strong> Digital download</p>
+
+        <section class="credits">
+            <h2>Song Credits</h2>
+            <div class="track">
+                <h3>Almost Late</h3>
+                <ul>
+                    <li><strong>Vocals:</strong> James</li>
+                    <li><strong>Guitar:</strong> James</li>
+                    <li><strong>Bass:</strong> Session Musician</li>
+                    <li><strong>Drums:</strong> Drum Machine</li>
+                    <li><strong>Produced by:</strong> James</li>
+                    <li><strong>Mixed by:</strong> James</li>
+                    <li><strong>Mastered by:</strong> James</li>
+                </ul>
+            </div>
+        </section>
+
+        <div id="paypal-container-ZZLVHA6R76ZPC" class="paypal-hosted-button"></div>
+
+        
+    </main>
+
+    <footer>
+        MMK &copy; 2026
+    </footer>
+
+    <script>
+        paypal.HostedButtons({
+            hostedButtonId: "ZZLVHA6R76ZPC"
+        }).render("#paypal-container-ZZLVHA6R76ZPC");
+    </script>
+
+</body>
+</html>

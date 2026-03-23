@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Media</title>
+    <meta name="description" content="Interact with my media" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: system-ui, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* horizontal centering */
+            justify-content: center; /* vertical centering */
+            padding: 3rem 2rem;
+        }
+
+        video {
+            width: 100%;
+            max-width: 10000px;
+            height: auto;
+        }
+
+        .media-image img {
+            width: 280px;
+            max-width: 90vw;
+            height: auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <h1>Media</h1>
+    </header>
+
+    <main>
+        <!-- Media carousel: each slide contains a video release -->
+        <div class="slideshow-container">
+            <!-- Slide 1 -->
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 2</div>
+                <video controls preload="metadata">
+                    <source src="../assets/video/hallomi.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="text">Hallomi</div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 2</div>
+                <video controls preload="metadata">
+                    <source src="../assets/video/newYearVid.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="text">New Year</div>
+            </div>
+
+            <!-- Previous/next controls for browsing releases -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <!-- Dot navigation lets users jump directly to a specific release -->
+        <div style="text-align:center; margin-top:1rem;">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 MMK</p>
+    </footer>
+
+    <script>
+        let slideIndex = 1;
+
+        // Show the first media item once the page is ready
+        document.addEventListener("DOMContentLoaded", () => {
+            showSlides(slideIndex);
+        });
+
+        // Move forward/backward through the media slides
+        function plusSlides(n) {
+            showSlides((slideIndex += n));
+        }
+
+        // Jump to a selected slide from dot navigation
+        function currentSlide(n) {
+            showSlides((slideIndex = n));
+        }
+
+        // Core slideshow logic: hide others, show active slide, sync active dot
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+
+            // Stop all videos when changing slides
+            let videos = document.querySelectorAll("video");
+            videos.forEach((video) => {
+                video.pause();
+                video.currentTime = 0;
+            });
+
+            if (n > slides.length) {
+                slideIndex = 1;
+            }
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+
+            slides[slideIndex - 1].style.display = "block";
+            if (dots[slideIndex - 1]) {
+                dots[slideIndex - 1].className += " active";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
