@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundraiser</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=BAAWdIduSeTeAYRpQyxNKGMd3RmqI_iWRRfzqmgb7LMmw6vi-F6MfewqmBol7MlQirEqIpAVtgQPTWBfgE&components=hosted-buttons&disable-funding=venmo&currency=GBP">
+    </script>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <h1>Fundraiser</h1>
+    </header>
+
+    <main class="container">
+        <!-- Release carousel: each artwork links to its purchase page -->
+
+        <div class="slideshow-container">
+            <!-- Slide 1 -->
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 4</div>
+                <section class="release">
+                    <a class="image wrapper">
+                        <img src="../assets/images/newYear.jpeg" alt="Newest Release">
+                    </a>
+                </section>
+                <div class="text">New Year</div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 4</div>
+                <section class="release">
+                    <a class="image wrapper">
+                        <img src="../assets/images/mpakatukaTene.jpg" alt="Mpakatuka Tene">
+                        <span class="new-tag">NEW</span>
+                    </a>
+                </section>
+                <div class="text">Mpakatuka Tene</div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 4</div>
+                <section class="release">
+                    <a class="image wrapper">
+                        <img src="../assets/images/ladyOfSong.JPG" alt="Lady Of Song">
+                    </a>
+                </section>
+                <div class="text">Lady Of Song</div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="mySlides fade">
+                <div class="numbertext">4 / 4</div>
+                <section class="release">
+                    <a class="image wrapper">
+                        <img src="../assets/images/almostLate.jpg" alt="Almost Late">
+                    </a>
+                </section>
+                <div class="text">Almost Late</div>
+            </div>
+
+            <!-- Previous/next controls for release browsing -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+
+        <br>
+        <!-- Dot navigation for jumping to a specific release -->
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
+
+        
+        <!-- PayPal donation/purchase area -->
+        <div
+            id="paypal-container-RHFZNNQP9QKBA"
+            style="width: 100%; max-width: 400px; margin: 0 auto;">
+        </div>
+
+        <script>
+            // Render the configured PayPal hosted button inside the container above
+            paypal.HostedButtons({
+                hostedButtonId: "RHFZNNQP9QKBA"
+            }).render("#paypal-container-RHFZNNQP9QKBA");
+        </script>
+
+        <script>
+        // Render the configured PayPal button in the container above
+        paypal.HostedButtons({
+            hostedButtonId: "CYCUQ4ZDUL4CU"
+        }).render("#paypal-container-CYCUQ4ZDUL4CU");
+    </script>
+
+    <!-- Slideshow behavior -->
+    <script>
+        let slideIndex = 1;
+
+        // Show the first release when the page loads
+        document.addEventListener("DOMContentLoaded", () => {
+            showSlides(slideIndex);
+        });
+
+        // Move one slide backward or forward
+        function plusSlides(n) {
+            showSlides((slideIndex += n));
+        }
+
+        // Jump directly to a selected slide
+        function currentSlide(n) {
+            showSlides((slideIndex = n));
+        }
+
+        // Hide non-active slides and highlight the active navigation dot
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+
+            if (!slides.length) {
+                return;
+            }
+
+            if (n > slides.length) {
+                slideIndex = 1;
+            }
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+    </script>
+
+
+    </main>
+
+    <footer>
+        MMK &copy; 2026
+    </footer>
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>

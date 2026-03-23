@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lock In - MMK</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+    
+    <header class="site-header">
+        <h1>Lock In</h1>
+    </header>
+
+    <main>
+        <section class="contact">
+            <!-- Audience planning form: collects demand and pricing signals for future shows -->
+            <form class="ticket-form" id="ticketForm">
+                <h2>Help us plan our next show </h2>
+                <p>Answering this helps an independent artist book shows that actually make sense.</p>
+                <label>
+                    Name
+                    <input type="text" name="name" placeholder="Your name" required>
+                </label>
+
+                <label>
+                    Email
+                    <input type="email" name="email" placeholder="you@email.com" required>
+                </label>
+
+                <label>
+                    City / Location
+                    <input type="text" name="location" placeholder="e.g. London">
+                </label>
+                
+                <label>
+                    How much would you pay for a ticket?
+                    <input type="number" name="price" placeholder="e.g. 20">
+                </label>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+        <script type="module">
+            import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+            const supabaseUrl = "https://mfzvlwxcnuqvzftjlmfo.supabase.co";
+            const supabaseKey = "sb_publishable_8uvuMz-fPZ1bHJoOqbqLiA_Cm1HWmnA";
+
+            // Connect this page to Supabase so submissions can be saved centrally
+            const supabase = createClient(supabaseUrl, supabaseKey);
+
+            // Submit form answers to the "tickets" table when the user clicks Submit
+            document.getElementById("ticketForm").addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                // Convert form fields into a simple data object for storage
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData);
+
+                console.log(data); // for debugging
+
+                // Save the audience response so booking decisions can use real input
+                const { error } = await supabase
+                    .from("tickets")
+                    .insert([
+                        {
+                            name: data.name,
+                            email: data.email,
+                            location: data.location,
+                            price: data.price
+                        }
+                    ]);
+
+                if (error) {
+                    console.error("FULL ERROR:", error);
+                    alert(error.message);
+                } else {
+                    // Confirm success and clear the form for the next response
+                    alert("Ticket saved successfully!");
+                    this.reset();
+                }
+            });
+        </script>
+    </main>
+    <footer>
+        <!-- Footer content -->
+    </footer>
+</body>
+</html>
