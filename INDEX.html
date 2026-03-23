@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: system-ui, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Main grid for books */
+        .books {
+            flex: 1; /* take available space */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 4rem;
+            padding: 0 4rem;
+            place-items: center; /* centers items */
+            align-content: center; /* centers the grid itself vertically */
+        }
+
+        .books img {
+            width: 280px;
+            max-width: 80vw;
+            height: auto;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main navigation cards: each book image opens a key section of the site -->
+    <main class="books">
+
+        <a href="html/OURCORNER.html">
+            <img src="assets/images/BOOKONE.png" alt="Our Corner">
+        </a>
+
+        <a href="html/MEDIA.html">
+            <img src="assets/images/BOOKTWO.png" alt="Media">
+        </a>
+
+        <a href="html/FORUM.html">
+            <img src="assets/images/BOOKTHREE.png" alt="Forum">
+        </a>
+
+    </main>
+    <!-- Quick links to audience form and fundraiser page -->
+    <div class="links">
+        <a href="html/CONTACT.html">Lock In</a>
+
+        <a href="html/FUNDRAISER.html">Fundraiser</a>
+        
+    </div>
+    <!-- Social link so visitors can continue engagement outside the website -->
+    <footer class="footer">
+        <a href="https://www.instagram.com/mmkadenge/" target="_blank" rel="noopener">
+            INSTAGRAM
+        </a>
+    </footer>
+</body>
+</html>
